@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1 - iPhone 17 Store</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+    <h1>iPhone 17 Store</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="task1.html">Task 1</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+      <a href="task4.html">Task 4</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Filters</h2>
+      <form>
+        <p><strong>Choose Color:</strong></p>
+        <label><input type="radio" name="color" value="black"> Black</label><br>
+        <label><input type="radio" name="color" value="white"> White</label><br>
+        <label><input type="radio" name="color" value="blue"> Blue</label><br><br>
+
+        <p><strong>Choose Storage:</strong></p>
+        <label><input type="checkbox" name="storage" value="128"> 128 GB</label><br>
+        <label><input type="checkbox" name="storage" value="256"> 256 GB</label><br>
+        <label><input type="checkbox" name="storage" value="512"> 512 GB</label><br><br>
+
+        <button type="submit">Apply</button>
+      </form>
+    </aside>
+
+    <!-- Main content -->
+    <section class="content">
+      <h2>Available iPhone 17 Models</h2>
+      <div class="product-grid">
+        <div class="product-card">
+          <img src="i17pro.jpg" alt="iPhone 17 Pro">
+          <h3>iPhone 17 Pro</h3>
+          <p>256 GB — $1299</p>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="product-card">
+          <img src="i17.jpg" alt="iPhone 17">
+          <h3>iPhone 17</h3>
+          <p>128 GB — $999</p>
+          <button>Buy Now</button>
+        </div>
+
+        <div class="product-card">
+          <img src="i17air.png" alt="iPhone 17 Plus">
+          <h3>iPhone 17 Air</h3>
+          <p>512 GB — $1499</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+   <footer>
+    <p>2025 Adilbek's project for Web technology (Frontend)</p>
+  </footer>
+</body>
+</html>     

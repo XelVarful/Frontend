@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3 - Table & Form</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <header>
+    <h1>Task 3: Table and Feedback Form</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="task1.html">Task 1</a>
+      <a href="task2.html">Task 2</a>
+      <a href="task3.html">Task 3</a>
+      <a href="task4.html">Task 4</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 id="table-title">Student Grades</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Grade</th>
+      </tr>
+      <tr>
+        <td>Tamerlan</td>
+        <td>Biology</td>
+        <td>C+</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Adilbek</td>
+        <td>Web Technology</td>
+        <td>A+</td>
+      </tr>
+      <tr>
+        <td>Aizat</td>
+        <td>Calculus</td>
+        <td>C-</td>
+      </tr>
+    </table>
+
+    <h2>Feedback Form</h2>
+    <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name"><br><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email"><br><br>
+
+      <label for="role">Role:</label><br>
+      <select id="role">
+        <option>Student</option>
+        <option>Teacher</option>
+        <option>Other</option>
+      </select><br><br>
+
+      <p>Did you like the assignment?</p>
+      <input type="radio" name="like" value="yes"> Yes
+      <input type="radio" name="like" value="no"> No <br><br>
+
+      <label for="comments">Comments:</label><br>
+      <textarea id="comments"></textarea><br><br>
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>2025 Adilbek's project for Web technology (Frontend)</p>
+  </footer>
+</body>
+</html>

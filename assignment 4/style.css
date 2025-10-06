@@ -1,0 +1,107 @@
+:root {
+  --bg: #050505;
+  --teal: #06c2b5;
+  --teal-dark: #049688;
+  --text: #e6fdfb;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.navbar {
+  background: #000;
+}
+
+.navbar-brand {
+  color: var(--teal) !important;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #ccc !important;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--teal) !important;
+}
+
+.hero {
+  padding: 5rem 1rem;
+  background: linear-gradient(180deg, #000, #0a0a0a);
+}
+.hero h1 {
+  font-size: 2.5rem;
+  color: var(--teal);
+}
+.lead {
+  font-size: 1.2rem;
+  color: #c7f8f4;
+}
+
+.btn-teal {
+  background: var(--teal);
+  border: none;
+  color: #000;
+  font-weight: bold;
+}
+.btn-teal:hover {
+  background: var(--teal-dark);
+}
+
+.bg-section {
+  background: #0a0a0a;
+}
+.bg-section h3 {
+  color: var(--teal);
+}
+
+.project-card {
+  background: #0b0b0b;
+  padding: 2rem;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  background: #0f0f0f;
+}
+.project-card h3 {
+  color: var(--teal);
+}
+
+.link-teal {
+  color: var(--teal);
+  text-decoration: none;
+}
+.link-teal:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+.animate {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.7s forwards;
+}
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .lead {
+    font-size: 1rem;
+  }
+}

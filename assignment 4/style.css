@@ -13,7 +13,7 @@ body {
 }
 
 .navbar {
-  background: #000;
+  background: #06c2b5;
 }
 
 .navbar-brand {
@@ -62,7 +62,7 @@ body {
   background: #0b0b0b;
   padding: 2rem;
   border-radius: 10px;
-  transition: transform 0.3s;
+  transition: transform 0.1s;
 }
 .project-card:hover {
   transform: translateY(-5px);

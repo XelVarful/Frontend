@@ -1,0 +1,53 @@
+:root{
+  --teal-700: #007f7f;
+  --teal-600: #009999;
+  --teal-500: #00b3b3;
+  --bg: #e6fbfb;
+}
+
+/* Background and fonts */
+body{
+  background: linear-gradient(180deg, var(--bg), #f0feff);
+  color: #063b3b;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding-top: 70px; /* space for fixed navbar */
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg,var(--teal-600),var(--teal-500));
+}
+.navbar a {
+  color: white !important;
+  font-weight: 500;
+}
+.navbar a:hover {
+  color: #f0f0f0 !important;
+}
+
+/* Cards */
+.card {
+  border: none;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,120,120,0.1);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg,var(--teal-600),var(--teal-500));
+  border: none;
+}
+.btn-success {
+  background: linear-gradient(90deg,#009999,#33cccc);
+  border: none;
+}
+
+
+.form-control:focus {
+  border-color: var(--teal-500);
+  box-shadow: 0 0 0 0.2rem rgba(0,179,179,0.25);
+}
+.form-control, .form-select, .form-check-input {
+  border-radius: 8px;
+}

@@ -1,0 +1,109 @@
+:root {
+  --bg: #050505;
+  --teal: #06c2b5;
+  --teal-dark: #049688;
+  --text: #e6fdfb;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header / Navigation */
+header {
+  background: #000;
+  padding: 15px 0;
+  text-align: center;
+  border-bottom: 2px solid var(--teal);
+}
+
+header nav a {
+  color: var(--teal);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: var(--text);
+}
+
+/* Sections */
+section {
+  padding: 30px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 900px;
+  background: #111;
+  border: 1px solid var(--teal-dark);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(6, 194, 181, 0.3);
+}
+
+button {
+  background: var(--teal);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 8px 15px;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background: var(--teal-dark);
+  color: var(--text);
+}
+
+/* Animations box */
+#box {
+  width: 100px;
+  height: 100px;
+  background: var(--teal);
+  margin: 20px 0;
+  position: relative;
+  border-radius: 10px;
+}
+
+/* Gallery */
+.gallery {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+      width: 200px;           /* фиксированная ширина */
+  height: 150px;          /* фиксированная высота */
+  object-fit: cover;      /* обрезает фото, сохраняя пропорции */
+  border: 2px solid var(--teal);
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid var(--teal);
+  border-radius: 10px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
+
+#fullImage {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#fullImage img {
+  max-width: 90%;
+  border-radius: 10px;
+  border: 3px solid var(--teal);
+}

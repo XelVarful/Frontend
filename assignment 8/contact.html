@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naqta Wear | Контакты</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Красная отметка для корзины */
+    #cartCount {
+      font-size: 0.75rem;
+      padding: 0.25em 0.5em;
+      top: 0;
+      right: 0;
+      display: none;
+    }
+
+    /* Hover для кнопки отправки */
+    #contactForm button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    /* Карта */
+    #map {
+      width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3" href="index.html">Naqta Wear</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" data-ru="Главная" data-en="Home">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html" data-ru="Каталог" data-en="Products">Каталог</a></li>
+          <li class="nav-item position-relative">
+            <a class="nav-link" href="cart.html" data-ru="Корзина" data-en="Cart">
+              Корзина
+              <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            </a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="about.html" data-ru="О нас" data-en="About">О нас</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html" data-ru="Контакты" data-en="Contact">Контакты</a></li>
+        </ul>
+        <div class="ms-3">
+          <button id="langToggle" class="btn btn-outline-dark btn-sm">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <main class="container my-5">
+    <h2 class="fw-bold text-center mb-4" data-ru="Контакты" data-en="Contact Us">Контакты</h2>
+
+    <div class="row g-4">
+      <!-- Форма обратной связи -->
+      <div class="col-md-6">
+        <form id="contactForm">
+          <div class="mb-3">
+            <label for="name" class="form-label" data-ru="Имя" data-en="Name">Имя</label>
+            <input type="text" class="form-control" id="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label" data-ru="Email" data-en="Email">Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label" data-ru="Сообщение" data-en="Message">Сообщение</label>
+            <textarea class="form-control" id="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-dark" data-ru="Отправить" data-en="Send">Отправить</button>
+        </form>
+      </div>
+
+      <!-- Контактная информация + карта -->
+      <div class="col-md-6">
+        <h5 data-ru="Наши контакты" data-en="Our Contacts">Наши контакты</h5>
+        <p data-ru="Email: info@naqta.kz" data-en="Email: info@naqta.kz">Email: info@naqta.kz</p>
+        <p data-ru="Телефон: +7 777 123 45 67" data-en="Phone: +7 777 123 45 67">Телефон: +7 777 123 45 67</p>
+        <p data-ru="Адрес: Астана, Казахстан, AITU" data-en="Address: Astana, Kazakhstan, AITU">Адрес: Астана, Казахстан, AITU</p>
+
+        <div id="map"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-1" data-ru="&copy; 2025 Naqta Wear. Все права защищены." data-en="&copy; 2025 Naqta Wear. All rights reserved.">&copy; 2025 Naqta Wear. Все права защищены.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ===== LANGUAGE TOGGLE & CART ===== -->
+  <script>
+    let currentLang = "ru";
+
+    // Language toggle
+    document.getElementById("langToggle").addEventListener("click", function () {
+      const elements = document.querySelectorAll("[data-ru][data-en]");
+      elements.forEach(el => {
+        el.innerHTML = (currentLang === "ru") ? el.getAttribute("data-en") : el.getAttribute("data-ru");
+      });
+      currentLang = (currentLang === "ru") ? "en" : "ru";
+      this.textContent = (currentLang === "ru") ? "EN" : "RU";
+    });
+
+    // Cart count
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const count = cart.length;
+      const cartCount = document.getElementById('cartCount');
+      if(cartCount) {
+        cartCount.textContent = count;
+        cartCount.style.display = count > 0 ? 'inline-block' : 'none';
+      }
+    }
+    updateCartCount();
+
+    // Form submit
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Спасибо! Ваше сообщение отправлено.');
+      this.reset();
+    });
+
+    // ===== GOOGLE MAP =====
+    function initMap() {
+      const aituCoords = { lat: 51.1255, lng: 71.4307 }; // Координаты AITU, Астана
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: aituCoords,
+      });
+      const marker = new google.maps.Marker({
+        position: aituCoords,
+        map: map,
+        title: "AITU - Astana IT University"
+      });
+    }
+  </script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"></script>
+
+</body>
+</html>

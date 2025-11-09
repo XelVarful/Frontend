@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naqta Wear | Корзина</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Счетчик на шапке */
+    #cartCount {
+      font-size: 0.75rem;
+      padding: 0.25em 0.5em;
+    }
+    #cartCountFooter {
+      font-size: 0.75rem;
+      padding: 0.25em 0.5em;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3" href="index.html">Naqta Wear</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" data-ru="Главная" data-en="Home">Главная</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html" data-ru="Каталог" data-en="Products">Каталог</a></li>
+          <li class="nav-item position-relative">
+            <a class="nav-link active" href="cart.html" data-ru="Корзина" data-en="Cart">Корзина</a>
+            <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display:none;">0</span>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="about.html" data-ru="О нас" data-en="About">О нас</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" data-ru="Контакты" data-en="Contact">Контакты</a></li>
+        </ul>
+        <div class="ms-3">
+          <button id="langToggle" class="btn btn-outline-dark btn-sm">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== CART SECTION ===== -->
+  <main class="container my-5">
+    <h2 class="fw-bold text-center mb-4" data-ru="Ваша корзина" data-en="Your Cart">Ваша корзина</h2>
+
+    <div id="cartItems" class="row g-4"></div>
+
+    <div class="mt-4 text-end">
+      <h4 data-ru="Общая сумма" data-en="Total">Общая сумма: <span id="totalPrice">₸0</span></h4>
+      <button id="clearCart" class="btn btn-danger mt-2" data-ru="Очистить корзину" data-en="Clear Cart">Очистить корзину</button>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <p class="mb-1" data-ru="&copy; 2025 Naqta Wear. Все права защищены." data-en="&copy; 2025 Naqta Wear. All rights reserved.">
+      &copy; 2025 Naqta Wear. Все права защищены.
+      <span id="cartCountFooter" class="badge bg-danger" style="display:none;">0</span>
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let currentLang = "ru";
+
+    // ===== LANGUAGE TOGGLE =====
+    document.getElementById("langToggle").addEventListener("click", function () {
+      const elements = document.querySelectorAll("[data-ru][data-en]");
+      elements.forEach(el => {
+        el.innerHTML = (currentLang === "ru") ? el.getAttribute("data-en") : el.getAttribute("data-ru");
+      });
+      currentLang = (currentLang === "ru") ? "en" : "ru";
+      this.textContent = (currentLang === "ru") ? "EN" : "RU";
+    });
+
+    // ===== UPDATE CART COUNTER =====
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const cartCount = document.getElementById('cartCount'); // шапка
+      const cartCountFooter = document.getElementById('cartCountFooter'); // футер
+
+      if(cartCount) {
+        if(cart.length > 0){
+          cartCount.textContent = cart.length;
+          cartCount.style.display = 'inline-block';
+        } else {
+          cartCount.style.display = 'none';
+        }
+      }
+
+      if(cartCountFooter) {
+        if(cart.length > 0){
+          cartCountFooter.textContent = cart.length;
+          cartCountFooter.style.display = 'inline-block';
+        } else {
+          cartCountFooter.style.display = 'none';
+        }
+      }
+    }
+
+    // ===== LOAD CART ITEMS =====
+    function loadCart() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      cartItemsContainer.innerHTML = '';
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      let total = 0;
+
+      if(cart.length === 0){
+        cartItemsContainer.innerHTML = `<p class="text-center" data-ru="В корзине пока нет товаров" data-en="Your cart is empty">В корзине пока нет товаров</p>`;
+        document.getElementById('totalPrice').textContent = '₸0';
+        updateCartCount();
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        total += item.price;
+
+        const itemHTML = `
+          <div class="col-12">
+            <div class="card p-3 d-flex flex-row align-items-center">
+              <img src="${item.img}" class="me-3" style="width:100px; height:auto;" alt="${item.name}">
+              <div class="flex-grow-1">
+                <h5>${item.name}</h5>
+                <p>₸${item.price} | <span data-ru="Размер" data-en="Size">Размер</span>: 
+                  <select class="size-select" data-index="${index}">
+                    <option value="S" ${item.size==='S'?'selected':''}>S</option>
+                    <option value="M" ${item.size==='M'?'selected':''}>M</option>
+                    <option value="L" ${item.size==='L'?'selected':''}>L</option>
+                    <option value="XL" ${item.size==='XL'?'selected':''}>XL</option>
+                  </select>
+                </p>
+              </div>
+              <button class="btn btn-danger remove-item" data-index="${index}" data-ru="Удалить" data-en="Remove">Удалить</button>
+            </div>
+          </div>
+        `;
+        cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+      });
+
+      document.getElementById('totalPrice').textContent = `₸${total}`;
+      updateCartCount();
+    }
+
+    // ===== REMOVE ITEM =====
+    document.addEventListener('click', function(e){
+      if(e.target.matches('.remove-item')){
+        const index = e.target.dataset.index;
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        loadCart();
+      }
+    });
+
+    // ===== CHANGE SIZE =====
+    document.addEventListener('change', function(e){
+      if(e.target.matches('.size-select')){
+        const index = e.target.dataset.index;
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        cart[index].size = e.target.value;
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+    });
+
+    // ===== CLEAR CART =====
+    document.getElementById('clearCart').addEventListener('click', function(){
+      localStorage.removeItem('cart');
+      loadCart();
+    });
+
+    // Initial load
+    loadCart();
+  </script>
+
+</body>
+</html>

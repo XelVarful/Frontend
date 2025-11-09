@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hotel Adilbek — Бронирование номеров</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Hotel Adilbek</h1>
+    <nav>
+      <a href="#" onclick="showPage('home');return false;" id="nav-home" class="active">Главная</a>
+      <a href="#" onclick="showPage('rooms');return false;" id="nav-rooms">Номера</a>
+      <a href="#" onclick="showPage('booking');return false;" id="nav-booking">Бронирование</a>
+      <a href="#" onclick="showPage('contacts');return false;" id="nav-contacts">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="page-home">
+      <h2>Добро пожаловать!</h2>
+      <p>Добро пожаловать в Hotel Adilbek — уютный отель для вашего отдыха. Забронируйте номер прямо сейчас!</p>
+    </section>
+
+    <section id="page-rooms" class="hidden">
+      <h2>Наши номера</h2>
+      <ul>
+        <li>Стандарт — $45/ночь</li>
+        <li>Делюкс — $70/ночь</li>
+        <li>Люкс — $100/ночь</li>
+      </ul>
+    </section>
+
+    <section id="page-booking" class="hidden">
+      <h2>Бронирование номера</h2>
+      <form onsubmit="submitBooking(event)">
+        <label>Имя:</label>
+        <input type="text" id="name" required>
+
+        <label>Дата заезда:</label>
+        <input type="date" id="checkin" required>
+
+        <label>Дата выезда:</label>
+        <input type="date" id="checkout" required>
+
+        <label>Тип номера:</label>
+        <select id="room">
+          <option>Стандарт</option>
+          <option>Делюкс</option>
+          <option>Люкс</option>
+        </select>
+
+        <button type="submit">Забронировать</button>
+      </form>
+
+      <p id="result"></p>
+    </section>
+
+    <section id="page-contacts" class="hidden">
+      <h2>Контакты</h2>
+      <p>Email: hoteladilbek@astanait.edu.kz</p>
+      <p>Телефон: +7 (701) 123-45-67</p>
+    </section>
+  </main>
+
+  <footer>
+     2025 Hotel Adilbek. Все права защищены.
+  </footer>
+
+  <script>
+    function showPage(page) {
+      const pages = ['home','rooms','booking','contacts'];
+      pages.forEach(p=>{
+        document.getElementById('page-'+p).classList.toggle('hidden', p!==page);
+        document.getElementById('nav-'+p).classList.toggle('active', p===page);
+      });
+    }
+
+    function submitBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      const room = document.getElementById('room').value;
+      document.getElementById('result').textContent = 
+        `Спасибо, ${name}! Вы забронировали номер "${room}" с ${checkin} по ${checkout}.`;
+    }
+  </script>
+</body>
+</html>
